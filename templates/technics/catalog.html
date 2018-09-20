@@ -1,0 +1,48 @@
+{% extends 'technics/base.html' %}
+{% load poll_extras %}
+{% load bootstrap %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+    <div>
+        <a href="/">
+            <h1 class="header center orange-text">Каталог</h1>
+        </a>
+    </div>
+    <div class="section">
+        <a class="waves-effect waves-light btn btn-common" href="/add-model/">Добавить модель</a>
+        <a class="waves-effect waves-light btn btn-common" href="/add-tipper/">Добавить Самосвал</a>
+    </div>
+    <div class="section">
+        <form action="" method="get">
+            {{ filter.form|bootstrap }}
+            <button class="waves-effect waves-light btn btn-common" type="submit">Применить</button>
+        </form>
+    </div>
+    {{ text }}
+    <div>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th>Бортовой номер</th>
+                <th>Модель</th>
+                <th>Макс. грузоподъемность</th>
+                <th>Текущий вес</th>
+                <th>Перегруз %</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tipper in tippers %}
+                <tr>
+                    <td>{{ tipper.number }}</td>
+                    <td>{{ tipper.model }}</td>
+                    <td>{{ tipper.model.max_weight }}</td>
+                    <td>{{ tipper.weight }}</td>
+                    <td>{{ tipper.weight|overload:tipper.model.max_weight }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

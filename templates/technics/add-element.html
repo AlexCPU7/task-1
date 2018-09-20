@@ -1,0 +1,17 @@
+{% extends 'technics/base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+    <div>
+        <h1 class="header center orange-text">{{ title }}</h1>
+    </div>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <a class="waves-effect waves-light btn btn-common" href="/">Назад</a>
+            <button class="waves-effect waves-light btn btn-common" type="submit">Сохранить</button>
+        </form>
+    </div>
+{% endblock content %}
